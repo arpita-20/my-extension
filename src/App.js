@@ -1,54 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import IconStashIntro from "./components/IconStashIntro";
 
-function App() {
-  const [svgElements, setSvgElements] = useState([]);
+import {
+  HashRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import IconsListPage from "./components/IconsListPage";
 
-  useEffect(() => {
-    // Ensure chrome API is available in the environment
-    if (typeof chrome !== "undefined" && chrome.tabs) {
-      // Query the active tab and execute a script to find SVG elements
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        if (tabs.length > 0) {
-          const activeTab = tabs[0];
-
-          // Inject code into the webpage to get all SVGs
-          chrome.scripting.executeScript(
-            {
-              target: { tabId: activeTab.id },
-              func: () => {
-                // Get all SVG elements on the page and return their outerHTML
-                const svgs = Array.from(document.querySelectorAll("svg"));
-                return svgs.map((svg) => svg.outerHTML);
-              },
-            },
-            (results) => {
-              if (results && results[0] && results[0].result) {
-                setSvgElements(results[0].result); // Update state with the SVG outerHTML
-              }
-            }
-          );
-        }
-      });
-    } else {
-      console.warn("Chrome APIs are not available in this environment");
-    }
-  }, []);
-
+const App = () => {
   return (
-    <div>
-      <h1>SVG Elements Detected</h1>
-      <div>
-        {svgElements.length > 0 ? (
-          svgElements.map((svg, index) => (
-            // Display each SVG element by rendering its HTML
-            <div key={index} dangerouslySetInnerHTML={{ __html: svg }} />
-          ))
-        ) : (
-          <p>No SVG elements detected.</p>
-        )}
-      </div>
+    <div className="w-full h-full">
+      <Router>
+        <Routes>
+          <Route path="/" element={<IconStashIntro />} />
+          <Route path="/IconsListPage" element={<IconsListPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
