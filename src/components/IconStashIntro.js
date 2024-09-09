@@ -21,7 +21,14 @@ const IconStashIntro = () => {
         component={Link}
         variant="contained"
         id="fetchDOMBtn"
-        sx={{ backgroundColor: "white", color: "#121212" }}
+        sx={{
+          backgroundColor: "white",
+          color: "#121212",
+          "&:hover": {
+            boxShadow: "5px 5px #FFEB30",
+            border: "1px solid #121212",
+          },
+        }}
         endIcon={<EastIcon />}
         to="/IconsListPage"
       >
