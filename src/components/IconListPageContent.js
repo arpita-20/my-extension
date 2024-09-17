@@ -30,9 +30,8 @@ const IconListPageContent = ({ isDarkMode }) => {
       });
       if (svgElements) {
         svgElements.forEach((svg) => {
-          svg.setAttribute("width", "40px");
-          svg.setAttribute("height", "40px");
-          svg.setAttribute("height", "40px");
+          svg.setAttribute("width", "30px");
+          svg.setAttribute("height", "30px");
           svg.style.cursor = "pointer";
         });
       }
@@ -82,6 +81,7 @@ const IconListPageContent = ({ isDarkMode }) => {
           <div
             key={index}
             ref={svgRef}
+            className="cursor-pointer"
             dangerouslySetInnerHTML={{ __html: svg }}
             onClick={() => downloadSVG(svg, index)}
           />
