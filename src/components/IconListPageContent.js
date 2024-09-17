@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const IconListPageContent = () => {
+// eslint-disable-next-line react/prop-types
+const IconListPageContent = ({ isDarkMode }) => {
   const [svgElements, setSvgElements] = useState([]);
   const svgRef = useRef(null); // Refer
 
@@ -30,6 +31,7 @@ const IconListPageContent = () => {
       if (svgElements) {
         svgElements.forEach((svg) => {
           svg.setAttribute("width", "40px");
+          svg.setAttribute("height", "40px");
           svg.setAttribute("height", "40px");
           svg.style.cursor = "pointer";
         });
@@ -85,7 +87,13 @@ const IconListPageContent = () => {
           />
         ))
       ) : (
-        <p className="text-base text-white">No SVG elements detected.</p>
+        <p
+          className={`${
+            isDarkMode ? "text-white" : "text-[#121212]"
+          } text-base font-medium`}
+        >
+          No SVG elements detected.
+        </p>
       )}
     </div>
   );
