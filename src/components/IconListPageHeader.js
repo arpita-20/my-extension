@@ -11,7 +11,7 @@ const IconListPageHeader = () => {
         <IconButton>
           <DarkModeOutlinedIcon fontSize="small" sx={{ color: "#fff" }} />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => window.close()}>
           <CloseOutlinedIcon fontSize="small" sx={{ color: "#fff" }} />
         </IconButton>
       </div>
